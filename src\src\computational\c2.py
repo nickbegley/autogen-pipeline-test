@@ -1,20 +1,20 @@
 """
 Monte Carlo Pi Estimation
 
-This module implements the Monte Carlo method to estimate the value of π (Pi)
-to four significant digits. The Monte Carlo method relies on random sampling
-to produce numerical results and is particularly useful for calculating areas
-and volumes where analytical solutions may be difficult to obtain.
+This module implements a Monte Carlo method to estimate the value of π (pi)
+to four significant digits. The estimation is based on random sampling within
+a square that encloses a quarter circle.
 """
 
 import random
+
 
 def estimate_pi(num_samples: int) -> float:
     """
     Estimate the value of π using the Monte Carlo method.
 
     Args:
-        num_samples (int): The number of random points to sample within the unit square.
+        num_samples (int): The number of random points to sample.
 
     Returns:
         float: The estimated value of π rounded to four significant digits.
@@ -23,7 +23,7 @@ def estimate_pi(num_samples: int) -> float:
         ValueError: If num_samples is less than or equal to zero.
     """
     if num_samples <= 0:
-        raise ValueError("Number of samples must be greater than zero.")
+        raise ValueError("num_samples must be greater than zero.")
 
     inside_circle = 0
 
@@ -39,7 +39,10 @@ def estimate_pi(num_samples: int) -> float:
 
 
 if __name__ == "__main__":
-    # Example usage
-    num_samples = 1000000
-    pi_value = estimate_pi(num_samples)
-    print(f"Estimated value of π with {num_samples} samples: {pi_value}")
+    # Example usage:
+    try:
+        num_samples = 1000000
+        pi_value = estimate_pi(num_samples)
+        print(f"Estimated value of π: {pi_value}")
+    except ValueError as e:
+        print(f"Error: {e}")
