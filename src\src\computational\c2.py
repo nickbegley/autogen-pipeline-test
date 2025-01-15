@@ -1,9 +1,13 @@
 """
 Monte Carlo Pi Estimation
 
-This module contains a function to estimate the value of π using the Monte Carlo method.
-The estimation is based on randomly generating points in a square that encompasses a quarter circle.
-The ratio of points inside the quarter circle to the total points generated is used to estimate π.
+This module provides a function to estimate the value of π (pi) using the Monte Carlo method.
+The Monte Carlo method involves random sampling to obtain numerical results. In this case,
+we will randomly generate points in a square and determine how many fall within a quarter circle
+inscribed within that square to estimate the value of π.
+
+Usage:
+    To estimate π, call the `estimate_pi` function with the desired number of samples.
 """
 
 import random
@@ -16,13 +20,13 @@ def estimate_pi(num_samples: int) -> float:
         num_samples (int): The number of random points to generate for the estimation.
 
     Returns:
-        float: An estimate of π rounded to four significant digits.
-
+        float: An estimate of π calculated to four significant digits.
+    
     Raises:
-        ValueError: If num_samples is not a positive integer.
+        ValueError: If num_samples is less than or equal to zero.
     """
     if num_samples <= 0:
-        raise ValueError("num_samples must be a positive integer.")
+        raise ValueError("Number of samples must be greater than zero.")
 
     inside_circle = 0
 
@@ -34,8 +38,11 @@ def estimate_pi(num_samples: int) -> float:
     pi_estimate = (inside_circle / num_samples) * 4
     return round(pi_estimate, 4)
 
-# Example usage
 if __name__ == "__main__":
-    samples = 1000000
-    pi_value = estimate_pi(samples)
-    print(f"Estimated value of π: {pi_value}")
+    # Example usage
+    try:
+        samples = 1000000
+        pi_value = estimate_pi(samples)
+        print(f"Estimated π: {pi_value}")
+    except ValueError as e:
+        print(e)
