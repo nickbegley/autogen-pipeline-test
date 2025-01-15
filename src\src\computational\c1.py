@@ -1,45 +1,45 @@
 """
-Fibonacci Sequence Generator Module
+Fibonacci Sequence Generator
 
-This module provides a function to generate and print the first 50
-numbers in the Fibonacci sequence.
+This module contains a function to generate and print the first 50 Fibonacci numbers.
+The Fibonacci sequence is defined as follows:
+- The first two numbers in the sequence are 0 and 1.
+- Each subsequent number is the sum of the two preceding ones.
+
+Example:
+    Calling the function `generate_fibonacci_sequence()` will print the first 50 Fibonacci numbers.
 """
 
 from typing import List
 
-def generate_fibonacci(n: int) -> List[int]:
+def generate_fibonacci_sequence(n: int = 50) -> List[int]:
     """
     Generate the first n Fibonacci numbers.
 
-    Args:
-        n (int): The number of Fibonacci numbers to generate.
+    Parameters:
+        n (int): The number of Fibonacci numbers to generate. Defaults to 50.
 
     Returns:
         List[int]: A list containing the first n Fibonacci numbers.
-
-    Raises:
-        ValueError: If n is not a positive integer.
     """
     if n <= 0:
-        raise ValueError("n must be a positive integer.")
-
+        return []
+    elif n == 1:
+        return [0]
+    
     fibonacci_sequence = [0, 1]
-
     for i in range(2, n):
-        next_value = fibonacci_sequence[-1] + fibonacci_sequence[-2]
-        fibonacci_sequence.append(next_value)
+        next_number = fibonacci_sequence[-1] + fibonacci_sequence[-2]
+        fibonacci_sequence.append(next_number)
+    
+    return fibonacci_sequence
 
-    return fibonacci_sequence[:n]
-
-def print_fibonacci(n: int) -> None:
+def print_fibonacci_sequence() -> None:
     """
-    Print the first n Fibonacci numbers.
-
-    Args:
-        n (int): The number of Fibonacci numbers to print.
+    Print the first 50 Fibonacci numbers.
     """
-    fibonacci_numbers = generate_fibonacci(n)
-    print(f"The first {n} Fibonacci numbers are: {fibonacci_numbers}")
+    fibonacci_numbers = generate_fibonacci_sequence()
+    print(fibonacci_numbers)
 
 if __name__ == "__main__":
-    print_fibonacci(50)
+    print_fibonacci_sequence()
