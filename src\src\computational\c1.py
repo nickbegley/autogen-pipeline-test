@@ -15,19 +15,17 @@ def generate_fibonacci(n: int) -> List[int]:
 
     Returns:
         List[int]: A list containing the first n Fibonacci numbers.
-    
-    Raises:
-        ValueError: If n is less than or equal to 0.
     """
     if n <= 0:
-        raise ValueError("The number of Fibonacci numbers to generate must be greater than 0.")
-
-    fibonacci_sequence = [0, 1]
-    for i in range(2, n):
-        next_number = fibonacci_sequence[i - 1] + fibonacci_sequence[i - 2]
-        fibonacci_sequence.append(next_number)
+        raise ValueError("The number of Fibonacci numbers to generate must be a positive integer.")
     
-    return fibonacci_sequence[:n]
+    fibonacci_numbers = [0, 1]
+    
+    for _ in range(2, n):
+        next_fib = fibonacci_numbers[-1] + fibonacci_numbers[-2]
+        fibonacci_numbers.append(next_fib)
+
+    return fibonacci_numbers[:n]
 
 def print_fibonacci(n: int) -> None:
     """
@@ -36,9 +34,8 @@ def print_fibonacci(n: int) -> None:
     Args:
         n (int): The number of Fibonacci numbers to print.
     """
-    fibonacci_numbers = generate_fibonacci(n)
-    for number in fibonacci_numbers:
-        print(number)
+    fibonacci_sequence = generate_fibonacci(n)
+    print(f"First {n} Fibonacci numbers: {fibonacci_sequence}")
 
 if __name__ == "__main__":
     print_fibonacci(50)
