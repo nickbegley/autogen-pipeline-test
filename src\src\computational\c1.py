@@ -1,39 +1,46 @@
-# src/computational/c1.py
+"""
+Fibonacci Sequence Generator
+
+This module contains a function to generate and print the first 50
+Fibonacci numbers.
+"""
 
 from typing import List
 
-def fibonacci_sequence(n: int) -> List[int]:
-    """Generate the first n Fibonacci numbers.
+
+def generate_fibonacci(n: int) -> List[int]:
+    """
+    Generate a list of Fibonacci numbers up to the nth number.
 
     Args:
         n (int): The number of Fibonacci numbers to generate.
 
     Returns:
         List[int]: A list containing the first n Fibonacci numbers.
-    
+
     Raises:
-        ValueError: If n is non-positive.
+        ValueError: If n is less than 1.
     """
-    if n <= 0:
-        raise ValueError("The number of Fibonacci numbers to generate must be positive.")
+    if n < 1:
+        raise ValueError("The number of Fibonacci numbers to generate must be at least 1.")
 
-    fib_sequence = [0, 1]
-
+    fibonacci_numbers = [0, 1]
     for i in range(2, n):
-        next_fib = fib_sequence[i - 1] + fib_sequence[i - 2]
-        fib_sequence.append(next_fib)
+        next_number = fibonacci_numbers[i - 1] + fibonacci_numbers[i - 2]
+        fibonacci_numbers.append(next_number)
 
-    return fib_sequence[:n]
+    return fibonacci_numbers[:n]
 
 
 def print_fibonacci(n: int) -> None:
-    """Print the first n Fibonacci numbers.
+    """
+    Print the first n Fibonacci numbers.
 
     Args:
         n (int): The number of Fibonacci numbers to print.
     """
-    fib_sequence = fibonacci_sequence(n)
-    print(f"The first {n} Fibonacci numbers are: {fib_sequence}")
+    fibonacci_numbers = generate_fibonacci(n)
+    print(f"The first {n} Fibonacci numbers are: {fibonacci_numbers}")
 
 
 if __name__ == "__main__":
