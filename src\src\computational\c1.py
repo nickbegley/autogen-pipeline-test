@@ -1,9 +1,8 @@
 """
-Fibonacci Sequence Generator
+Fibonacci Sequence Generator Module
 
-This module provides a function to generate and print the first 50 Fibonacci numbers.
-The Fibonacci sequence is a series of numbers where each number is the sum of the two preceding ones,
-usually starting with 0 and 1.
+This module provides a function to generate and print the first 50
+numbers in the Fibonacci sequence.
 """
 
 from typing import List
@@ -19,17 +18,18 @@ def generate_fibonacci(n: int) -> List[int]:
         List[int]: A list containing the first n Fibonacci numbers.
 
     Raises:
-        ValueError: If n is less than 1.
+        ValueError: If n is not a positive integer.
     """
-    if n < 1:
-        raise ValueError("Input must be a positive integer greater than 0.")
-    
-    fibonacci_numbers = [0, 1]
+    if n <= 0:
+        raise ValueError("n must be a positive integer.")
+
+    fibonacci_sequence = [0, 1]
+
     for i in range(2, n):
-        next_number = fibonacci_numbers[-1] + fibonacci_numbers[-2]
-        fibonacci_numbers.append(next_number)
-    
-    return fibonacci_numbers[:n]
+        next_value = fibonacci_sequence[-1] + fibonacci_sequence[-2]
+        fibonacci_sequence.append(next_value)
+
+    return fibonacci_sequence[:n]
 
 def print_fibonacci(n: int) -> None:
     """
@@ -37,9 +37,6 @@ def print_fibonacci(n: int) -> None:
 
     Args:
         n (int): The number of Fibonacci numbers to print.
-
-    Raises:
-        ValueError: If n is less than 1.
     """
     fibonacci_numbers = generate_fibonacci(n)
     print(f"The first {n} Fibonacci numbers are: {fibonacci_numbers}")
