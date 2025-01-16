@@ -1,8 +1,15 @@
 """
 Monte Carlo Pi Estimation
 
-This module contains a function to estimate the value of π using the Monte Carlo method.
-The estimation is based on the ratio of points that fall inside a quarter circle to the total number of points.
+This module implements a Monte Carlo method to estimate the value of π (Pi).
+The estimation is performed by randomly sampling points in a unit square and
+checking how many fall inside a quarter circle inscribed within that square.
+The ratio of points inside the circle to the total number of points is used to
+estimate π.
+
+Usage:
+    To use the function, call `estimate_pi(num_samples: int) -> float` with the desired
+    number of random samples.
 """
 
 import random
@@ -11,17 +18,17 @@ def estimate_pi(num_samples: int) -> float:
     """
     Estimate the value of π using the Monte Carlo method.
 
-    Args:
-        num_samples (int): The number of random samples to use for the estimation.
+    Parameters:
+        num_samples (int): The number of random samples to draw.
 
     Returns:
-        float: The estimated value of π rounded to four significant digits.
-
+        float: The estimated value of π rounded to 4 significant digits.
+    
     Raises:
-        ValueError: If num_samples is not a positive integer.
+        ValueError: If num_samples is less than or equal to zero.
     """
     if num_samples <= 0:
-        raise ValueError("Number of samples must be a positive integer.")
+        raise ValueError("The number of samples must be greater than zero.")
 
     inside_circle = 0
 
@@ -34,9 +41,8 @@ def estimate_pi(num_samples: int) -> float:
     pi_estimate = (inside_circle / num_samples) * 4
     return round(pi_estimate, 4)
 
-
+# Example of calling the function
 if __name__ == "__main__":
-    # Example usage: Estimate π with 100,000 samples
-    samples = 100000
-    pi_value = estimate_pi(samples)
-    print(f"Estimated value of π with {samples} samples: {pi_value}")
+    num_samples = 1000000
+    pi_value = estimate_pi(num_samples)
+    print(f"Estimated value of π: {pi_value}")
