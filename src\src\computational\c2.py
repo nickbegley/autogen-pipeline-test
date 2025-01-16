@@ -1,48 +1,61 @@
 """
 Monte Carlo Pi Estimation
 
-This module implements a Monte Carlo method to estimate the value of π (Pi).
-The estimation is performed by randomly sampling points in a unit square and
-checking how many fall inside a quarter circle inscribed within that square.
-The ratio of points inside the circle to the total number of points is used to
-estimate π.
+This module implements the Monte Carlo method to estimate the value of π (pi)
+to four significant digits. The Monte Carlo method uses random sampling to
+determine the ratio of points that fall inside a quarter circle versus the
+total number of points sampled.
 
 Usage:
-    To use the function, call `estimate_pi(num_samples: int) -> float` with the desired
-    number of random samples.
+    To estimate π, create an instance of the MonteCarloPiEstimator and call
+    the estimate_pi method.
+
+Example:
+    estimator = MonteCarloPiEstimator(num_samples=10000)
+    pi_estimate = estimator.estimate_pi()
+    print(f"Estimated value of π: {pi_estimate:.4f}")
 """
 
 import random
 
-def estimate_pi(num_samples: int) -> float:
-    """
-    Estimate the value of π using the Monte Carlo method.
-
-    Parameters:
-        num_samples (int): The number of random samples to draw.
-
-    Returns:
-        float: The estimated value of π rounded to 4 significant digits.
+class MonteCarloPiEstimator:
+    """Class to estimate the value of π using the Monte Carlo method."""
     
-    Raises:
-        ValueError: If num_samples is less than or equal to zero.
-    """
-    if num_samples <= 0:
-        raise ValueError("The number of samples must be greater than zero.")
+    def __init__(self, num_samples: int):
+        """
+        Initialize the estimator with the number of samples.
 
-    inside_circle = 0
+        Args:
+            num_samples (int): The number of random points to sample.
 
-    for _ in range(num_samples):
-        x = random.uniform(0, 1)
-        y = random.uniform(0, 1)
-        if x**2 + y**2 <= 1:
-            inside_circle += 1
+        Raises:
+            ValueError: If num_samples is less than or equal to zero.
+        """
+        if num_samples <= 0:
+            raise ValueError("Number of samples must be greater than zero.")
+        
+        self.num_samples = num_samples
 
-    pi_estimate = (inside_circle / num_samples) * 4
-    return round(pi_estimate, 4)
+    def estimate_pi(self) -> float:
+        """
+        Estimate the value of π using the Monte Carlo method.
 
-# Example of calling the function
+        Returns:
+            float: The estimated value of π rounded to four significant digits.
+        """
+        inside_circle = 0
+        
+        for _ in range(self.num_samples):
+            x = random.uniform(0, 1)
+            y = random.uniform(0, 1)
+            if x**2 + y**2 <= 1:
+                inside_circle += 1
+        
+        pi_estimate = (inside_circle / self.num_samples) * 4
+        return round(pi_estimate, 4)
+
+# Example usage
 if __name__ == "__main__":
-    num_samples = 1000000
-    pi_value = estimate_pi(num_samples)
-    print(f"Estimated value of π: {pi_value}")
+    estimator = MonteCarloPiEstimator(num_samples=10000)
+    pi_estimate = estimator.estimate_pi()
+    print(f"Estimated value of π: {pi_estimate:.4f}")
